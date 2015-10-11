@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,8 @@ public class EditBoundary implements ActionListener{
 	private JScrollPane scroll;
 	private JPanel botoes;
 	private String caminho;
+	private JButton alterarCor;
+	private JButton alterarFundo;
 	private EditControl edit = new EditControl();
 	
 	public EditBoundary(){
@@ -38,21 +41,27 @@ public class EditBoundary implements ActionListener{
 		abrir = new JButton("Abrir");
 		salvarComo = new JButton("Salvar Como");
 		salvar = new JButton("Salvar");
+		alterarCor = new JButton("Alterar Cor");
+		alterarFundo = new JButton("Alterar Cor de Fundo");
 		
 		novo.addActionListener(this);
 		salvar.addActionListener(this);
 		salvarComo.addActionListener(this);
 		abrir.addActionListener(this);
+		alterarCor.addActionListener(this);
+		alterarFundo.addActionListener(this);
 		
 		botoes.add(novo);
 		botoes.add(abrir);
 		botoes.add(salvarComo);
 		botoes.add(salvar);
+		botoes.add(alterarCor);
+		botoes.add(alterarFundo);
 		
 		principal.add(botoes, BorderLayout.SOUTH);
 		janela.setContentPane(principal);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		janela.setSize(400, 400);
+		janela.setSize(600, 600);
 		janela.setVisible(true);
 	}
 	
@@ -77,6 +86,12 @@ public class EditBoundary implements ActionListener{
 				JOptionPane.showMessageDialog(null, "Não pode ser salvo");
 			}
 		}
+		else if(cmd.equals("Alterar Cor")){
+			alterarCor();
+		}
+		else if(cmd.equals("Alterar Cor de Fundo")){
+			alterarFundo();
+		}
 		else{
 			if(caminho == null){
 				caminho = JOptionPane.showInputDialog("Digite o caminho");
@@ -96,4 +111,140 @@ public class EditBoundary implements ActionListener{
 		}
 	}
 	
+	public void alterarCor(){
+		String cor = JOptionPane.showInputDialog("Digite a cor desejada");
+		
+		if(cor.startsWith("verm") || cor.startsWith("Verm")){
+			areaTexto.setForeground(Color.RED);		
+		}
+		else if(cor.startsWith("Viol") || cor.startsWith("viol")){
+			areaTexto.setForeground(new Color(173,234,234));						
+		}
+		else if(cor.startsWith("Turques") || cor.startsWith("turque")){
+			areaTexto.setForeground(new Color(219,112,147));								
+		}
+		else if(cor.startsWith("Preto") || cor.startsWith("preto")){
+			areaTexto.setForeground(Color.BLACK);
+		}
+		else if(cor.startsWith("sal") || cor.startsWith("Sal")){
+			areaTexto.setForeground(new Color(111,66,66));						
+		}
+		else if(cor.startsWith("Orqu") || cor.startsWith("orqu")){
+			areaTexto.setForeground(new Color(153,50,205));						
+		}
+		else if(cor.startsWith("Marro") || cor.startsWith("marro")){
+			areaTexto.setForeground(new Color(165,42,42));			
+		}
+		else if(cor.startsWith("Light") || cor.startsWith("light")){
+			areaTexto.setForeground(new Color(143,143,189));						
+		}
+		else if(cor.startsWith("Cyan") || cor.startsWith("cyan")){
+			areaTexto.setForeground(Color.cyan);					
+		}
+		else if(cor.startsWith("Coral") || cor.startsWith("coral")){
+			areaTexto.setForeground(new Color(255,127,0));						
+		}
+		else if(cor.startsWith("Bronz") || cor.startsWith("bronz")){
+			areaTexto.setForeground(new Color(219,147,112));						
+		}
+		else if(cor.startsWith("Branco") || cor.startsWith("branco")){
+			areaTexto.setForeground(Color.WHITE);			
+		}
+		else if(cor.startsWith("cinz") || cor.startsWith("Cinz")){
+			areaTexto.setForeground(Color.GRAY);			
+		}
+		else if(cor.startsWith("Laranj") || cor.startsWith("laran")){
+			areaTexto.setForeground(Color.ORANGE);			
+		}
+		else if(cor.startsWith("Amare") || cor.startsWith("amare")){
+			areaTexto.setForeground(Color.YELLOW);			
+		}
+		else if(cor.startsWith("rosa") || cor.startsWith("Rosa")){
+			areaTexto.setForeground(Color.PINK);			
+		}
+		else if(cor.startsWith("Azul") || cor.startsWith("azul")){
+			areaTexto.setForeground(Color.BLUE);			
+		}
+		else if(cor.startsWith("verd") || cor.startsWith("Verd")){
+			areaTexto.setForeground(Color.GREEN);
+		}
+		else if(cor.startsWith("Roxo") || cor.startsWith("roxo")){
+			areaTexto.setForeground(new Color(135,31,120));						
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "Cor não encontrada");
+		}
+	}
+	
+	public void alterarFundo(){
+	String cor = JOptionPane.showInputDialog("Digite a cor desejada");
+		
+		if(cor.startsWith("verm") || cor.startsWith("Verm")){
+			areaTexto.setBackground(Color.RED);		
+		}
+		else if(cor.startsWith("Viol") || cor.startsWith("viol")){
+			areaTexto.setBackground(new Color(173,234,234));						
+		}
+		else if(cor.startsWith("Turques") || cor.startsWith("turque")){
+			areaTexto.setBackground(new Color(219,112,147));								
+		}
+		else if(cor.startsWith("Preto") || cor.startsWith("preto")){
+			areaTexto.setBackground(Color.BLACK);
+		}
+		else if(cor.startsWith("sal") || cor.startsWith("Sal")){
+			areaTexto.setBackground(new Color(111,66,66));						
+		}
+		else if(cor.startsWith("Orqu") || cor.startsWith("orqu")){
+			areaTexto.setBackground(new Color(153,50,205));						
+		}
+		else if(cor.startsWith("Marro") || cor.startsWith("marro")){
+			areaTexto.setBackground(new Color(165,42,42));			
+		}
+		else if(cor.startsWith("Light") || cor.startsWith("light")){
+			areaTexto.setBackground(new Color(143,143,189));						
+		}
+		else if(cor.startsWith("Cyan") || cor.startsWith("cyan")){
+			areaTexto.setBackground(Color.cyan);					
+		}
+		else if(cor.startsWith("Coral") || cor.startsWith("coral")){
+			areaTexto.setBackground(new Color(255,127,0));						
+		}
+		else if(cor.startsWith("Bronz") || cor.startsWith("bronz")){
+			areaTexto.setBackground(new Color(219,147,112));						
+		}
+		else if(cor.startsWith("Branco") || cor.startsWith("branco")){
+			areaTexto.setBackground(Color.WHITE);			
+		}
+		else if(cor.startsWith("cinz") || cor.startsWith("Cinz")){
+			areaTexto.setBackground(Color.GRAY);			
+		}
+		else if(cor.startsWith("Laranj") || cor.startsWith("laran")){
+			areaTexto.setBackground(Color.ORANGE);			
+		}
+		else if(cor.startsWith("Amare") || cor.startsWith("amare")){
+			areaTexto.setBackground(Color.YELLOW);			
+		}
+		else if(cor.startsWith("rosa") || cor.startsWith("Rosa")){
+			areaTexto.setBackground(Color.PINK);			
+		}
+		else if(cor.startsWith("Azul") || cor.startsWith("azul")){
+			areaTexto.setBackground(Color.BLUE);			
+		}
+		else if(cor.startsWith("verd") || cor.startsWith("Verd")){
+			areaTexto.setBackground(Color.GREEN);
+		}
+		else if(cor.startsWith("Roxo") || cor.startsWith("roxo")){
+			areaTexto.setBackground(new Color(135,31,120));						
+		}
+		else{
+			JOptionPane.showMessageDialog(null, "Cor não encontrada");
+		}
+	}
+	
+	public void alterarTamanho(){
+		JFrame janelinha = new JFrame("Alterar estilo");
+		JPanel botoesJanelinha = new JPanel(new FlowLayout());
+		
+		
+	}
 }
