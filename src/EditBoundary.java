@@ -6,10 +6,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 public class EditBoundary implements ActionListener{
@@ -92,6 +94,10 @@ public class EditBoundary implements ActionListener{
 		else if(cmd.equals("Alterar Cor de Fundo")){
 			alterarFundo();
 		}
+		else if(cmd.equals("Italico")){
+			
+		}
+		else if(cmd.equals(suffix))
 		else{
 			if(caminho == null){
 				caminho = JOptionPane.showInputDialog("Digite o caminho");
@@ -243,8 +249,30 @@ public class EditBoundary implements ActionListener{
 	
 	public void alterarTamanho(){
 		JFrame janelinha = new JFrame("Alterar estilo");
-		JPanel botoesJanelinha = new JPanel(new FlowLayout());
+		JLabel label = new JLabel("Digite o tamanho");
+		JPanel botoesJanelinha = new JPanel(new BorderLayout());
+		JTextField textoTamanho = new JTextField();
+		JButton negrito = new JButton("Negrito");
+		JButton italico = new JButton("Italico");
+		JButton sublinhado = new JButton("Sublinhado");
 		
+		JPanel botoesAbaixo = new JPanel(new FlowLayout());
+		
+		botoesAbaixo.add(negrito);
+		botoesAbaixo.add(italico);
+		botoesAbaixo.add(sublinhado);
+		
+		botoesJanelinha.add(label, BorderLayout.NORTH);
+		botoesJanelinha.add(textoTamanho, BorderLayout.CENTER);
+		botoesJanelinha.add(botoesAbaixo, BorderLayout.SOUTH);
+		
+		negrito.addActionListener(this);
+		italico.addActionListener(this);
+		sublinhado.addActionListener(this);
+		
+		janelinha.setContentPane(botoesJanelinha);
+		janelinha.setVisible(true);
+		janelinha.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 	}
 }
