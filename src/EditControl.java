@@ -4,10 +4,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
-
 public class EditControl {
-	
 	public String abrir(String caminho){
 		File f = new File(caminho);
 		StringBuffer buffer = new StringBuffer();
@@ -28,7 +25,6 @@ public class EditControl {
 		}
 		return null;
 	}
-	
 	public boolean salvar(String texto, String caminho){
 		File f = new File(caminho);
 		try {
@@ -44,10 +40,8 @@ public class EditControl {
 			writer.close();
 			return false;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
 	}
-	
 }
