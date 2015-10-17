@@ -42,7 +42,8 @@ public class JanelaRede extends JFrame implements ActionListener{
 			try {
 				OutputStreamWriter mand = new OutputStreamWriter(cliente.getOutputStream());
 				BufferedWriter writer = new BufferedWriter(mand);
-				writer.append(txt.getText() + "\n");
+				writer.append(txt.getText() 
+						+ "\n");
 				writer.append(texto);
 				writer.flush();
 				mand.close();

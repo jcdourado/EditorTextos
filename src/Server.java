@@ -22,7 +22,8 @@ public class Server {
 		StringBuffer txtBuffer = new StringBuffer();
 		String ca = buffer.readLine();
 		while(buffer.ready()){
-			txtBuffer.append(buffer.readLine());
+			txtBuffer.append(buffer.readLine() +
+					"\n\r");
 		}
 		reader.close();
 		buffer.close();

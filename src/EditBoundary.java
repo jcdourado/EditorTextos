@@ -29,6 +29,9 @@ public class EditBoundary implements ActionListener{
 	private JTextField textoTamanho;
 	private JButton alterarTamanho;
 	private JButton rede;
+	private JButton copiar;
+	private JButton colar;
+	private JButton recortar;
 	private EditControl edit = new EditControl();
 	public EditBoundary(){
 		janela = new JFrame("Editor de textos");
@@ -44,22 +47,31 @@ public class EditBoundary implements ActionListener{
 		salvar = new JButton("Salvar");
 		alterarTamanho = new JButton("Alterar Estilo");
 		rede = new JButton("Trabalhar em Rede");
+		copiar = new JButton("Copiar");
+		colar = new JButton("Colar");
+		recortar = new JButton("Recortar");
 		novo.addActionListener(this);
 		salvar.addActionListener(this);
 		salvarComo.addActionListener(this);
 		abrir.addActionListener(this);
 		alterarTamanho.addActionListener(this);
 		rede.addActionListener(this);
+		copiar.addActionListener(this);
+		colar.addActionListener(this);
+		recortar.addActionListener(this);
 		botoes.add(novo);
 		botoes.add(abrir);
 		botoes.add(salvarComo);
 		botoes.add(salvar);
 		botoes.add(alterarTamanho);
 		botoes.add(rede);
+		botoes.add(copiar);
+		botoes.add(colar);
+		botoes.add(recortar);
 		principal.add(botoes, BorderLayout.SOUTH);
 		janela.setContentPane(principal);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		janela.setSize(600, 600);
+		janela.setSize(900, 600);
 		janela.setVisible(true);
 	}
 	public static void main(String[] args) {
@@ -71,6 +83,15 @@ public class EditBoundary implements ActionListener{
 		if(cmd.equals("Novo")){
 			caminho = null;
 			this.areaTexto.setText("");
+		}
+		else if(cmd.equals("Recortar")){
+			recortar();
+		}
+		else if(cmd.equals("Copiar")){
+			copiar();
+		}
+		else if(cmd.equals("Colar")){
+			colar();
 		}
 		else if(cmd.equals("Abrir")){
 			caminho = JOptionPane.showInputDialog("Digite o caminho");
@@ -147,63 +168,103 @@ public class EditBoundary implements ActionListener{
 	}
 	
 	public Color buscor(){
-		String cor = JOptionPane.showInputDialog("Digite a cor desejada");
-
-		if(cor.startsWith("verm") || cor.startsWith("Verm")){
+		String cor = JOptionPane.showInputDialog("Dig"
+				+ ""
+				+ "ite a cor desejada");
+		if(cor.startsWith("verm") || cor.startsWith("Ve"
+				+ "rm")){
 			return Color.RED;		
 		}
-		else if(cor.startsWith("Viol") || cor.startsWith("viol")){
+		else if(cor.startsWith("Viol") || cor.startsWith("v"
+				+ "iol")){
 			return (new Color(173,234,234));						
 		}
-		else if(cor.startsWith("Turques") || cor.startsWith("turque")){
+		else if(cor.startsWith("Tur"
+				+ "ques") || cor.startsWith("turq"
+						+ "ue")){
 			return (new Color(219,112,147));								
 		}
-		else if(cor.startsWith("Preto") || cor.startsWith("preto")){
+		else if(cor.startsWith("Pre"
+				+ "to") || cor.startsWith("pr"
+						+ "eto")){
 			return (Color.BLACK);
 		}
-		else if(cor.startsWith("sal") || cor.startsWith("Sal")){
+		else if(cor.startsWith("s"
+				+ "al") || cor.startsWith("S"
+						+ "al")){
 			return (new Color(111,66,66));						
 		}
-		else if(cor.startsWith("Orqu") || cor.startsWith("orqu")){
+		else if(cor.startsWith("Or"
+				+ "qu") || cor.startsWith("or"
+						+ "qu")){
 			return (new Color(153,50,205));						
 		}
-		else if(cor.startsWith("Marro") || cor.startsWith("marro")){
+		else if(cor.startsWith("M"
+				+ "arro") || cor.startsWith("mar"
+						+ "ro")){
 			return (new Color(165,42,42));			
 		}
-		else if(cor.startsWith("Light") || cor.startsWith("light")){
+		else if(cor.startsWith("Lig"
+				+ "ht") || cor.startsWith("li"
+						+ "ght")){
 			return(new Color(143,143,189));						
 		}
-		else if(cor.startsWith("Cyan") || cor.startsWith("cyan")){
+		else if(cor.startsWith("Cy"
+				+ ""
+				+ "an") || cor.startsWith("cy"
+						+ "an")){
 			return(Color.cyan);					
 		}
-		else if(cor.startsWith("Coral") || cor.startsWith("coral")){
+		else if(cor.startsWith("Cor"
+				+ "al") || cor.startsWith("c"
+						+ "oral")){
 			return(new Color(255,127,0));						
 		}
-		else if(cor.startsWith("Bronz") || cor.startsWith("bronz")){
+		else if(cor.startsWith("Bro"
+				+ "nz") || cor.startsWith("bro"
+						+ ""
+						+ "nz")){
 			return(new Color(219,147,112));						
 		}
-		else if(cor.startsWith("Branco") || cor.startsWith("branco")){
+		else if(cor.startsWith("Br"
+				+ "anco") || cor.startsWith("bra"
+						+ "nco")){
 			return(Color.WHITE);			
 		}
-		else if(cor.startsWith("cinz") || cor.startsWith("Cinz")){
+		else if(cor.startsWith("ci"
+				+ "nz") || cor.startsWith("Cin"
+						+ "z")){
 			return(Color.GRAY);			
 		}
-		else if(cor.startsWith("Laranj") || cor.startsWith("laran")){
+		else if(cor.startsWith("Lar"
+				+ "anj") || cor.startsWith("lara"
+						+ "n")){
 			return(Color.ORANGE);			
 		}
-		else if(cor.startsWith("Amare") || cor.startsWith("amare")){
+		else if(cor.startsWith("Am"
+				+ "are") || cor.startsWith("a"
+						+ "ma"
+						+ "re")){
 			return(Color.YELLOW);			
 		}
-		else if(cor.startsWith("rosa") || cor.startsWith("Rosa")){
+		else if(cor.startsWith("ro"
+				+ "sa") || cor.startsWith("Ros"
+						+ "a")){
 			return(Color.PINK);			
 		}
-		else if(cor.startsWith("Azul") || cor.startsWith("azul")){
+		else if(cor.startsWith("A"
+				+ "zul") || cor.startsWith("az"
+						+ "ul")){
 			return(Color.BLUE);			
 		}
-		else if(cor.startsWith("verd") || cor.startsWith("Verd")){
+		else if(cor.startsWith("ve"
+				+ "rd") || cor.startsWith("Ve"
+						+ "rd")){
 			return (Color.GREEN);
 		}
-		else if(cor.startsWith("Roxo") || cor.startsWith("roxo")){
+		else if(cor.startsWith("Ro"
+				+ "xo") || cor.startsWith("ro"
+						+ "xo")){
 			return (new Color(135,31,120));						
 		}
 		return null;
@@ -211,22 +272,29 @@ public class EditBoundary implements ActionListener{
 	public void alterarFundo(){
 		Color cor = buscor();
 		if(cor == null){
-			JOptionPane.showMessageDialog(null, "Cor não encontrada");
+			JOptionPane.showMessageDialog(null, "Cor"
+					+ " não encontrada");
 		}
 		else{
 			areaTexto.setBackground(cor);
 		}
 	}
 	public void alterarTamanho(){
-		JFrame janelinha = new JFrame("Alterar estilo");
-		JLabel label = new JLabel("Digite o tamanho e a fonte");
+		JFrame janelinha = new JFrame("Alte"
+				+ "rar estilo");
+		JLabel label = new JLabel("Digite o"
+				+ " tamanho e a fonte");
 		JPanel botoesJanelinha = new JPanel(new BorderLayout());
 		textoTamanho = new JTextField();
-		JButton negrito = new JButton("Negrito");
-		JButton italico = new JButton("Italico");
+		JButton negrito = new JButton("Negri"
+				+ "to");
+		JButton italico = new JButton("Itali"
+				+ "co");
 		JButton alterarCor = new JButton("Alterar Cor");;
-		JButton alterarFundo = new JButton("Alterar Cor de Fundo");
-		JButton alterarFonte = new JButton("Alterar Fonte");
+		JButton alterarFundo = new JButton("Alterar"
+				+ " Cor de Fundo");
+		JButton alterarFonte = new JButton("Alterar"
+				+ " Fonte");
 		JPanel botoesAbaixo = new JPanel(new FlowLayout());
 		botoesAbaixo.add(negrito);
 		botoesAbaixo.add(italico);
@@ -247,7 +315,9 @@ public class EditBoundary implements ActionListener{
 		janelinha.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	public void rede(){
-		String server = JOptionPane.showInputDialog("Digite o caminho do servidor e sua porta");
+		String server = JOptionPane.showInputDialog("Digite "
+				+ "o caminho do servidor "
+				+ "e sua porta");
 		String[] split = server.split(" ");
 		try {
 			Socket cliente = new Socket(split[0], Integer.parseInt(split[1]));
@@ -257,20 +327,33 @@ public class EditBoundary implements ActionListener{
 			}
 		}
 		catch (ArrayIndexOutOfBoundsException e){
-			JOptionPane.showMessageDialog(null, "Servidor Invalido");
+			JOptionPane.showMessageDialog(null, "Servidor "
+					+ "Invalido");
 		}
 		catch (NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Servidor Invalido");
+			JOptionPane.showMessageDialog(null, "Servidor"
+					+ " Invalido");
 			e.printStackTrace();
 		} catch (UnknownHostException e) {
-			JOptionPane.showMessageDialog(null, "Servidor Invalido");
+			JOptionPane.showMessageDialog(null, "Servidor"
+					+ " Invalido");
 			e.printStackTrace();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Servidor Invalido");
+			JOptionPane.showMessageDialog(null, "Servidor"
+					+ " Invalido");
 			e.printStackTrace();
 		}		
 	}
 	public void alterarTxt(String txto){
 		this.areaTexto.setText(txto);
+	}
+	public void copiar(){
+		areaTexto.copy();
+	}
+	public void recortar(){
+		areaTexto.cut();
+	}
+	public void colar(){
+		areaTexto.paste();
 	}
 }
