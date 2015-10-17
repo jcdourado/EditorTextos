@@ -7,9 +7,13 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,55 +23,99 @@ public class EditBoundary implements ActionListener{
 	private JFrame janela;
 	private JPanel principal;
 	private JTextArea areaTexto;
-	private JButton abrir;
-	private JButton salvarComo;
-	private JButton salvar;
-	private JButton novo;
 	private JScrollPane scroll;
 	private JPanel botoes;
 	private String caminho;
 	private JTextField textoTamanho;
-	private JButton alterarTamanho;
-	private JButton rede;
-	private JButton copiar;
-	private JButton colar;
-	private JButton recortar;
 	private EditControl edit = new EditControl();
+	private JMenuBar menu = new JMenuBar();
+	private JMenu arquivo = new JMenu("Arquivo");
+	private JMenu editar = new JMenu("Editar");
+	private JMenu servidor = new JMenu("Servidor");
+	private JMenu ajuda = new JMenu("Ajuda");
+	private JMenuItem itemNovo = new JMenuItem("Novo");
+	private JMenuItem itemAbrir = new JMenuItem("Abrir");
+	private JMenuItem itemSalvar = new JMenuItem("Salvar");
+	private JMenuItem itemSalvarComo = new JMenuItem("Salvar Como");
+	private JMenuItem itemFonte = new JMenuItem("Fonte");
+	private JMenuItem itemCopiar = new JMenuItem("Copiar");
+	private JMenuItem itemRecortar = new JMenuItem("Recortar");
+	private JMenuItem itemColar = new JMenuItem("Colar");
+	private JMenuItem itemServidor = new JMenuItem("Iniciar Servidor");
+	private JMenuItem itemSobre = new JMenuItem("Sobre");
 	public EditBoundary(){
 		janela = new JFrame("Editor de textos");
+		janela.setJMenuBar(menu);
 		principal = new JPanel(new BorderLayout());
 		areaTexto = new JTextArea();
 		scroll = new JScrollPane();
 		scroll.getViewport().add(areaTexto);
 		principal.add(scroll,BorderLayout.CENTER);
 		botoes = new JPanel(new FlowLayout());
-		novo = new JButton("Novo");
-		abrir = new JButton("Abrir");
-		salvarComo = new JButton("Salvar Como");
-		salvar = new JButton("Salvar");
-		alterarTamanho = new JButton("Alterar Estilo");
-		rede = new JButton("Trabalhar em Rede");
-		copiar = new JButton("Copiar");
-		colar = new JButton("Colar");
-		recortar = new JButton("Recortar");
-		novo.addActionListener(this);
-		salvar.addActionListener(this);
-		salvarComo.addActionListener(this);
-		abrir.addActionListener(this);
-		alterarTamanho.addActionListener(this);
-		rede.addActionListener(this);
-		copiar.addActionListener(this);
-		colar.addActionListener(this);
-		recortar.addActionListener(this);
-		botoes.add(novo);
-		botoes.add(abrir);
-		botoes.add(salvarComo);
-		botoes.add(salvar);
-		botoes.add(alterarTamanho);
-		botoes.add(rede);
-		botoes.add(copiar);
-		botoes.add(colar);
-		botoes.add(recortar);
+		menu.add(arquivo);
+		menu.add(editar);
+		menu.add(servidor);
+		menu.add(ajuda);
+		arquivo.add(itemNovo);
+		arquivo.add(itemAbrir);
+		arquivo.add(itemSalvar);
+		arquivo.add(itemSalvarComo);
+		editar.add(itemFonte);
+		editar.add(itemCopiar);
+		editar.add(itemRecortar);
+		editar.add(itemColar);
+		servidor.add(itemServidor);
+		ajuda.add(itemSobre);
+		itemNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				caminho = null;
+				areaTexto.setText("");
+			}
+		});
+		itemAbrir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				caminho = JOptionPane.showInputDialog("Digite o caminho");
+				setarTexto(edit.abrir(caminho));
+			}
+		});
+		itemSalvarComo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				caminho = JOptionPane.showInputDialog("Digite o caminho");
+				if(!edit.salvar(areaTexto.getText(), caminho)){
+					JOptionPane.showMessageDialog(null, "Não pode ser salvo");
+				}				
+			}
+		});
+		itemFonte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				alterarTamanho();
+			}
+		});
+		itemCopiar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				copiar();
+			}
+		});
+		itemRecortar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				recortar();
+			}
+		});
+		itemColar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				colar();
+			}
+		});
+		itemServidor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rede();
+			}
+		});
+		itemSobre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, "Feito com amor pelo Julio <3. \n Design feito pelo Fabio");
+			}
+		});
 		principal.add(botoes, BorderLayout.SOUTH);
 		janela.setContentPane(principal);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,33 +125,9 @@ public class EditBoundary implements ActionListener{
 	public static void main(String[] args) {
 		new EditBoundary();
 	}
-	@Override
 	public void actionPerformed(ActionEvent eve) {
 		String cmd = eve.getActionCommand();
-		if(cmd.equals("Novo")){
-			caminho = null;
-			this.areaTexto.setText("");
-		}
-		else if(cmd.equals("Recortar")){
-			recortar();
-		}
-		else if(cmd.equals("Copiar")){
-			copiar();
-		}
-		else if(cmd.equals("Colar")){
-			colar();
-		}
-		else if(cmd.equals("Abrir")){
-			caminho = JOptionPane.showInputDialog("Digite o caminho");
-			setarTexto(edit.abrir(caminho));
-		}
-		else if(cmd.equals("Salvar Como")){
-			caminho = JOptionPane.showInputDialog("Digite o caminho");
-			if(!edit.salvar(areaTexto.getText(), caminho)){
-				JOptionPane.showMessageDialog(null, "Não pode ser salvo");
-			}
-		}
-		else if(cmd.equals("Alterar Cor")){
+		if(cmd.equals("Alterar Cor")){
 			alterarCor();
 		}
 		else if(cmd.equals("Alterar Cor de Fundo")){
@@ -135,17 +159,6 @@ public class EditBoundary implements ActionListener{
 			}
 			else{
 				areaTexto.setFont(new Font(txt[1], Font.BOLD, Integer.parseInt(txt[0])));
-			}
-		}
-		else if(cmd.equals("Trabalhar em Rede")){
-			rede();
-		}
-		else{
-			if(caminho == null){
-				caminho = JOptionPane.showInputDialog("Digite o caminho");
-			}
-			if(!edit.salvar(areaTexto.getText(), caminho)){
-					JOptionPane.showMessageDialog(null, "Não pode ser salvo");
 			}
 		}
 	}
