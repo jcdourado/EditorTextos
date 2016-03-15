@@ -1,0 +1,43 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+.container{
+	margin: auto 5%;
+}
+
+.form{
+	margin: 3% auto;
+	display: block;
+}
+
+.form__titulo{
+	font-family: fantasy;
+	font-size: 1.2em;
+	display: block;
+	margin-bottom: 1%;
+}
+
+.area-text{
+	width: 80%;
+	height: 100px;
+	display: block;
+}
+
+.button{
+	margin: 3% auto 0% auto;
+	border-radius: 10%;
+	width: 100px;
+	height: 20px;
+}
+
+.button:hover{
+	border: 2px solid gray;
+	transition: border 2s;
+}
+
+.subtitulo{
+	color: red;
+	font-size: 0.9em;
+}
