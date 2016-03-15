@@ -1,7 +1,18 @@
 function trocaTexto(){
 	var entrada = document.getElementsByClassName("area-text--entrada")[0].value;
-	document.getElementsByClassName("area-text--saida")[0].value = tiraMin(entrada);	
+	document.getElementsByClassName("area-text--saida")[0].value = tiraMin(entrada);
 }
+
+var openFile = function(event) {
+    var input = event.target;
+
+    var reader = new FileReader();
+    reader.onload = function(){
+			document.getElementsByClassName("area-text--entrada")[0].value = reader.result;
+			document.getElementsByClassName("area-text--saida")[0].value = tiraMin(reader.result);
+    };
+    reader.readAsText(input.files[0]);
+  };
 
 
 function tiraMin(texto){
@@ -33,5 +44,3 @@ function tiraMin(texto){
 
 	return texto;
 }
-
-
