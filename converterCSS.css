@@ -32,9 +32,8 @@
 	height: 20px;
 }
 
-.button:hover{
-	border: 2px solid gray;
-	transition: border 2s;
+.path{
+	margin: 3% auto 0% auto;
 }
 
 .subtitulo{
